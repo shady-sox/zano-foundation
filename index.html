@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zano Foundation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --accent: #d4af37;
+            --white: #ffffff;
+            --light-gray: #f0f2f5;
+            --text-dark: #111111;
+            --text-muted: #444444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* STICKY GLASS HEADER WITH LOGO IMAGE */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 6%;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 72px;
+            width: auto;
+            object-fit: cover;
+            border-radius: 50%; /* Keeps logo circular if cropped as square */
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        nav a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* HERO SECTION WITH SUBTLE BLURRED BACKGROUND */
+        .hero {
+            position: relative;
+            padding: 160px 5% 120px;
+            color: var(--white);
+            text-align: center;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            right: -12px;
+            bottom: -12px;
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('zano1.jpeg') no-repeat center center/cover;
+            filter: blur(2px);
+            -webkit-filter: blur(2px);
+            transform: scale(1.05);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            max-width: 900px;
+            margin-bottom: 22px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+            letter-spacing: 0.5px;
+        }
+
+        /* GLASSMORPHISM FLOATING BUTTON */
+        .btn {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: var(--white);
+            padding: 16px 42px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 40px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* SECTION LAYOUTS */
+        section {
+            padding: 100px 6%;
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.3rem;
+            margin-bottom: 55px;
+            text-align: center;
+            font-weight: 800;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 50px;
+            align-items: center;
+        }
+
+        /* MISSION SECTION */
+        .mission-wrapper {
+            background: var(--white);
+        }
+
+        .mission-wrapper .section-title {
+            color: var(--text-dark);
+        }
+
+        .mission-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .img-container img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+            transition: transform 0.4s ease;
+        }
+
+        .img-container img:hover {
+            transform: scale(1.02);
+        }
+
+        /* VISION SECTION */
+        .vision-wrapper {
+            background: var(--light-gray);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .vision-wrapper .section-title {
+            color: var(--text-dark);
+        }
+
+        .vision-text {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 55px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            line-height: 1.9;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        /* OUR VALUES - LIGHT GLASSMORPHISM SECTION */
+        .values-wrapper {
+            position: relative;
+            padding: 120px 6%;
+            background: linear-gradient(135deg, #edf1f7 0%, #dbe2ec 100%);
+            overflow: hidden;
+        }
+
+        .values-wrapper .section-title {
+            color: var(--text-dark);
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            max-width: 1250px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* TRANSPARENT FLOATING GLASS CARDS WITH CLEAR TEXT */
+        .card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 40px 32px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.7);
+            border-color: rgba(255, 255, 255, 1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+        }
+
+        .card h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        footer {
+            background: #050505;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 50px 5%;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1.05rem;
+            }
+            nav {
+                display: none;
+            }
+            /* SOCIAL CONTACTS STYLING */
+        .social-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .social-btn {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <!-- INSTRUCTION: Save your logo image in your folder and change 'logo.png' to your exact logo filename -->
+            <img src="logo.jpeg" alt="Zano Foundation Logo" class="logo-img">
+            <span class="logo">Zano Foundation</span>
+        </div>
+        <nav>
+            <a href="#mission">Mission</a>
+            <a href="#vision">Vision</a>
+            <a href="#values">Values</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>ZANO FOUNDATION</h1>
+            <p>Investing in young people today to build a stronger community tomorrow</p>
+            <a href="#mission" class="btn">Explore</a>
+        </div>
+    </section>
+
+    <div class="mission-wrapper">
+        <section id="mission">
+            <h2 class="section-title">OUR MISSION</h2>
+            <div class="grid-2">
+                <div>
+                    <p class="mission-text">
+                        ZANO FOUNDATION EXISTS TO BRIDGE THE GAP BETWEEN POTENTIAL AND OPPORTUNITY BY EXPOSING TOWNSHIP YOUTH TO TERTIARY EDUCATION PATHWAYS, PROVIDING STRUCTURED MENTORSHIP, AND DEVELOPING LEADERSHIP CAPACITY WHILE ADDRESSING OVERLOOKED CHALLENGES AFFECTING THE CHILD LEFT BEHIND WITHIN AN INCLUSIVE AND BALANCED YOUTH DEVELOPMENT FRAMEWORK
+                    </p>
+                </div>
+                <div class="img-container">
+                    <img src="zano3.jpeg" alt="Zano Foundation Learners">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="vision-wrapper">
+        <section id="vision">
+            <h2 class="section-title">OUR VISION</h2>
+            <p class="vision-text">
+                TOGETHER, WE ARE SHAPING A FUTURE WHERE EVERY YOUNG PERSON CAN DREAM, GROW, AND SUCCEED. TO BUILD A GENERATION OF EMPOWERED, SELF AWARE, AND OPPORTUNITY READY YOUNG PEOPLE, FOR UNDERSERVED COMMUNITIES. YOUNG PEOPLE WHO WILL BE EQUIPPED TO ACCESS TERTIARY EDUCATION, LEAD WITH PURPOSE, AND SHAPE A BETTER FUTURE FOR THEMSELVES AND THE SOCIETY. A FUTURE WHERE NO CHILD IS LEFT BEHIND
+            </p>
+            
+            <div class="img-container" style="max-width: 700px; margin: 0 auto;">
+                <img src="zano2.jpeg" alt="Zano Foundation Vision">
+            </div>
+        </section>
+    </div>
+
+    <div class="values-wrapper">
+        <section id="values">
+            <h2 class="section-title">OUR VALUES</h2>
+            <div class="card-container">
+                <div class="card">
+                    <h3>INCLUSIVITY</h3>
+                    <p>ZANO FOUNDATION IS GROUNDED IN A VALUE SYSTEM THAT SPEAKS DIRECTLY TO THE KIND OF SOCIETY IT SEEKS TO BUILD. AT THE CORE IS INCLUSIVITY, A COMMITMENT TO ENSURE THAT NO VOICE IS MARGINALISED AND THAT ACCESS TO OPPORTUNITIES IS NOT A PRIVILEGE FOR THE FEW, BUT A RIGHT FOR ALL.</p>
+                </div>
+                <div class="card">
+                    <h3>UBUNTU & EXCELLENCE</h3>
+                    <p>THIS IS DEEPLY INTERTWINED WITH UBUNTU, THE BELIEF THAT 'I AM BECAUSE WE ARE', WHICH SHAPES HOW THE FOUNDATION APPROACHES COMMUNITY, SOLIDARITY, AND COLLECTIVE UPLIFTMENT RATHER THAN INDIVIDUAL GROWTH. THE PURSUIT OF EXCELLENCE DRIVES ZANO FOUNDATION NOT ONLY TO ACT, BUT TO ACT WITH INTENTION, QUALITY AND IMPACT, REJECTING MEDIOCRITY IN ADDRESSING SOCIAL CHALLENGE.</p>
+                </div>
+                <div class="card">
+                    <h3>DIVERSITY</h3>
+                    <p>THROUGH DIVERSITY, THE FOUNDATION RECOGNISES THAT DIFFERENT PERSPECTIVES, BACKGROUND, AND LIVED EXPERIENCES ARE NOT OBSTACLES BUT ASSETS IN BUILDING, INNOVATIVE AND RELEVANT SOLUTIONS.</p>
+                </div>
+                <div class="card">
+                    <h3>SUSTAINABILITY</h3>
+                    <p>FINALLY, SUSTAINABILITY ENSURES THAT ALL INITIATIVES ARE DESIGNED WITH THE FUTURE IN MIND, CREATING LONG TERM CHANGE THAT ENDURES BEYOND IMMEDIATE INTERVENTION. TOGETHER, THESE VALUES POSITION ZANO FOUNDATION AS A TRANFORMATIVE FORCE COMMITED TO BUILDING AN EQUITABLE, CONSCIOUS, AND RESILIENT SOCIETY.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Zano Foundation.</p>
+        <div class="social-contacts">
+            <!-- Replace with your actual WhatsApp link and Instagram link -->
+            <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" class="social-btn">WhatsApp Us</a>
+            <a href="https://instagram.com/YOUR_INSTAGRAM_HANDLE" target="_blank" class="social-btn">Instagram</a>
+        </div>
+    </footer>
+
+</body>
+</html>
